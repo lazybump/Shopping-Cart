@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useShoppingCart } from "../context/ShoppingCartContext";
 
 export function NavBar() {
+  const { cartQuantity } = useShoppingCart();
   return (
     <nav className="bg-white shadow-sm mb-3 sticky top-0">
       <div className="flex justify-between items-center p-5">
@@ -25,7 +27,7 @@ export function NavBar() {
             />
           </svg>
           <div className="bg-red-600 h-5 w-5 rounded-full absolute bottom-0 right-0 text-sm flex items-center justify-center text-white translate-x-1/4 translate-y-1/4">
-            3
+            {cartQuantity || 0}
           </div>
         </button>
       </div>

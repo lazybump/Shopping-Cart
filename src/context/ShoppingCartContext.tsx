@@ -5,9 +5,13 @@ interface ShoppingCartProviderProps {
 }
 
 interface CartContextType {
+  openCart: () => void;
+  closeCart: () => void;
   getItemQuantity: (id: number) => number;
   incrementItem: (id: number) => void;
   decrementItem: (id: number) => void;
+  cartQuantity: number;
+  cartItems: CartItem[];
 }
 
 export interface CartItem {
@@ -25,6 +29,10 @@ export const ShoppingCartProvider = ({
   children,
 }: ShoppingCartProviderProps) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  const cartQuantity = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
+  const openCart = () => {};
+  const closeCart = () => {};
 
   function getItemQuantity(id: number) {
     const retrievedItem = cartItems.find((item) => item.id === id);
@@ -57,7 +65,15 @@ export const ShoppingCartProvider = ({
 
   return (
     <ShoppingCartContext.Provider
-      value={{ getItemQuantity, incrementItem, decrementItem }}
+      value={{
+        getItemQuantity,
+        incrementItem,
+        decrementItem,
+        cartQuantity,
+        cartItems,
+        openCart,
+        closeCart,
+      }}
     >
       {children}
     </ShoppingCartContext.Provider>
