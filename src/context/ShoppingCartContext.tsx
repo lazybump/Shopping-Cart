@@ -33,38 +33,25 @@ export const ShoppingCartProvider = ({
 
   function incrementItem(id: number) {
     setCartItems((prev) => {
-      // check if item is already in cart
       const retrievedItem = prev.find((item) => item.id === id);
-      // if the item is already in the cart, just increment the quantity
-      if (retrievedItem) {
-        return prev.map((item) => {
-          if (item.id === id) {
-            return { ...item, quantity: retrievedItem.quantity + 1 };
-          } else {
-            return item;
-          }
-        });
-      } else {
-        return [...prev, { id, quantity: 1 }];
-      }
+      if (!retrievedItem) return [...prev, { id, quantity: 1 }];
+      return prev.map((item) => {
+        if (item.id === id)
+          return { ...item, quantity: retrievedItem.quantity + 1 };
+        else return item;
+      });
     });
   }
 
   function decrementItem(id: number) {
     setCartItems((prev) => {
-      // check if item is already in cart
       const retrievedItem = prev.find((item) => item.id === id);
-      if (retrievedItem) {
-        return prev.map((item) => {
-          if (item.id === id) {
-            return { ...item, quantity: retrievedItem.quantity - 1 };
-          } else {
-            return item;
-          }
-        });
-      } else {
-        return [...prev];
-      }
+      if (!retrievedItem) return [...prev];
+      return prev.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: retrievedItem.quantity - 1 };
+        } else return item;
+      });
     });
   }
 
