@@ -7,11 +7,12 @@ export function ShoppingCart() {
   const { getItemQuantity, isOpen, toggleCart } = useShoppingCart();
   return (
     <div
-      className={`bg-white fixed right-0 top-0 h-screen w-[500px] px-4 py-5 border border-red-700 transition-all duration-500 ${
-        isOpen ? "" : "translate-x-full"
-      }`}
+      className={
+        "bg-white fixed right-0 top-0 h-screen w-[500px] px-4 py-5 border border-red-700 transition-all duration-500 " +
+        (isOpen ? "" : "translate-x-full")
+      }
     >
-      <div className="flex justify-between border-2 border-blue-500">
+      <div className="flex justify-between">
         <span>SIDE CART</span>
         <button onClick={toggleCart}>
           <GrClose />
