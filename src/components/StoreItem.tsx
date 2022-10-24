@@ -11,9 +11,6 @@ interface StoreItemProps {
 export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
   const { getItemQuantity, incrementItem, decrementItem } = useShoppingCart();
   const quantity = getItemQuantity(id);
-
-  // Continue from 40:54
-
   return (
     <div className="bg-white rounded overflow-hidden shadow md:max-w-md">
       <img src={imgUrl} className="h-52 w-full object-cover" />
