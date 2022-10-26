@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 
 export function NavBar() {
-  const { cartQuantity, toggleCart } = useShoppingCart();
+  const { cartQuantity, setIsOpen } = useShoppingCart();
   return (
     <nav className="bg-white shadow-sm mb-3 sticky top-0">
       <div className="flex justify-between items-center p-5">
@@ -11,7 +11,7 @@ export function NavBar() {
           <NavLink to={"/store"}>Store</NavLink>
           <NavLink to={"/about"}>About</NavLink>
         </div>
-        <button className="relative" onClick={toggleCart}>
+        <button className="relative" onClick={() => setIsOpen((prev) => !prev)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="blue"
