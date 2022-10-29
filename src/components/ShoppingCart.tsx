@@ -1,11 +1,11 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import storeItems from "../data/items.json";
-import { formatCurrency } from "../utilities/formatCurrency";
 import { GrClose } from "react-icons/gr";
 import { useEffect, useRef } from "react";
+import CartItem from "./CartItem";
 
 export function ShoppingCart() {
-  const { getItemQuantity, isOpen, setIsOpen } = useShoppingCart();
+  const { isOpen, setIsOpen } = useShoppingCart();
 
   const cartRef = useRef<HTMLDivElement>(null);
 
@@ -35,29 +35,9 @@ export function ShoppingCart() {
           <GrClose />
         </button>
       </div>
-      <div>
+      <div className="my-4">
         {storeItems.map((item) => (
-          <article
-            className="my-4 flex justify-between border-2 border-black"
-            key={item.id}
-          >
-            <div className="border-2 border-yellow-500 w-1/2 flex justify-between space-x-2">
-              <img
-                src={item.imgUrl}
-                className="h-20 w-[200px] object-cover border-2 border-x-teal-500"
-              />
-              <div className="border-2 border-red-600 flex flex-col justify-center">
-                <span>{item.name}</span>
-                <span className="text-slate-500">
-                  {formatCurrency(item.price)}
-                </span>
-              </div>
-            </div>
-            <div className="border-2 border-green-600">
-              <span>{getItemQuantity(item.id)}</span>
-              <button>x</button>
-            </div>
-          </article>
+          <CartItem {...item} key={item.id} />
         ))}
       </div>
     </div>
