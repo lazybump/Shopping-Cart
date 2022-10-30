@@ -5,8 +5,8 @@ interface ShoppingCartProviderProps {
 }
 
 interface CartContextType {
-  openCart: () => void;
-  closeCart: () => void;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   getItemQuantity: (id: number) => number;
   incrementItem: (id: number) => void;
   decrementItem: (id: number) => void;
@@ -29,10 +29,9 @@ export const ShoppingCartProvider = ({
   children,
 }: ShoppingCartProviderProps) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const cartQuantity = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
-  const openCart = () => {};
-  const closeCart = () => {};
 
   function getItemQuantity(id: number) {
     const retrievedItem = cartItems.find((item) => item.id === id);
@@ -71,8 +70,8 @@ export const ShoppingCartProvider = ({
         decrementItem,
         cartQuantity,
         cartItems,
-        openCart,
-        closeCart,
+        isOpen,
+        setIsOpen,
       }}
     >
       {children}

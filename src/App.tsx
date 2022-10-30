@@ -4,6 +4,7 @@ import { Store } from "./pages/Store";
 import { About } from "./pages/About";
 import { NavBar } from "./components/NavBar";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+import { ShoppingCart } from "./components/ShoppingCart";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </div>
+      <ShoppingCart />
     </ShoppingCartProvider>
   );
 }
