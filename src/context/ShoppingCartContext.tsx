@@ -10,11 +10,13 @@ interface CartContextType {
   getItemQuantity: (id: number) => number;
   incrementItem: (id: number) => void;
   decrementItem: (id: number) => void;
+  removeFromCart: (id: number) => void;
   cartQuantity: number;
-  cartItems: CartItem[];
+  cartItems: CartItemType[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItemType[]>>;
 }
 
-export interface CartItem {
+export interface CartItemType {
   id: number;
   quantity: number;
 }
@@ -28,7 +30,7 @@ export function useShoppingCart() {
 export const ShoppingCartProvider = ({
   children,
 }: ShoppingCartProviderProps) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const cartQuantity = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
@@ -42,6 +44,7 @@ export const ShoppingCartProvider = ({
     setCartItems((prev) => {
       const retrievedItem = prev.find((item) => item.id === id);
       if (!retrievedItem) return [...prev, { id, quantity: 1 }];
+
       return prev.map((item) => {
         if (item.id === id)
           return { ...item, quantity: retrievedItem.quantity + 1 };
@@ -54,6 +57,7 @@ export const ShoppingCartProvider = ({
     setCartItems((prev) => {
       const retrievedItem = prev.find((item) => item.id === id);
       if (!retrievedItem) return [...prev];
+
       return prev.map((item) => {
         if (item.id === id) {
           return { ...item, quantity: retrievedItem.quantity - 1 };
@@ -62,14 +66,20 @@ export const ShoppingCartProvider = ({
     });
   }
 
+  function removeFromCart(id: number) {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  }
+
   return (
     <ShoppingCartContext.Provider
       value={{
         getItemQuantity,
         incrementItem,
         decrementItem,
+        removeFromCart,
         cartQuantity,
         cartItems,
+        setCartItems,
         isOpen,
         setIsOpen,
       }}

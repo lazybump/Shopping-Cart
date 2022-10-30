@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import CartItem from "./CartItem";
 
 export function ShoppingCart() {
-  const { isOpen, setIsOpen } = useShoppingCart();
+  const { isOpen, setIsOpen, cartItems } = useShoppingCart();
 
   const cartRef = useRef<HTMLDivElement>(null);
 
@@ -36,9 +36,13 @@ export function ShoppingCart() {
         </button>
       </div>
       <div className="my-4">
-        {storeItems.map((item) => (
-          <CartItem {...item} key={item.id} />
-        ))}
+        {cartItems.length > 0 ? (
+          cartItems.map((item) => <CartItem {...item} key={item.id} />)
+        ) : (
+          <h2 className="text-center relative top-20 font-bold">
+            Cart is empty
+          </h2>
+        )}
       </div>
     </div>
   );
