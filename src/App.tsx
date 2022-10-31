@@ -12,7 +12,7 @@ function App() {
     <ShoppingCartProvider>
       <Overlay />
       <NavBar />
-      <div className="mt-24 mb-4 px-3">
+      <div className="mt-20 mb-4 px-3">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/store" element={<Store />} />
