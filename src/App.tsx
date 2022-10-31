@@ -5,10 +5,12 @@ import { About } from "./pages/About";
 import { NavBar } from "./components/NavBar";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import { ShoppingCart } from "./components/ShoppingCart";
+import Overlay from "./components/Overlay";
 
 function App() {
   return (
     <ShoppingCartProvider>
+      <Overlay />
       <NavBar />
       <div className="mb-4 px-3">
         <Routes>
