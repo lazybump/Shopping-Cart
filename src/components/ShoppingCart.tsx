@@ -22,8 +22,8 @@ export function ShoppingCart() {
   }, []);
 
   const totalCartPrice = cartItems.reduce((acc, curr) => {
-    const retrievedItem = storeItems.find((item) => item.id === curr.id)!;
-    return acc + curr.quantity * retrievedItem.price;
+    const retrievedItem = storeItems.find((item) => item.id === curr.id);
+    return acc + curr.quantity * (retrievedItem?.price || 0);
   }, 0);
 
   return (
@@ -34,13 +34,13 @@ export function ShoppingCart() {
       `}
       ref={cartRef}
     >
-      <div className="flex justify-between border border-red-600">
+      <div className="flex justify-between">
         <span>SIDE CART</span>
         <button onClick={() => setIsOpen((prev) => !prev)}>
           <GrClose />
         </button>
       </div>
-      <div className="my-4 border border-blue-600">
+      <div className="my-4">
         {cartItems.length > 0 ? (
           cartItems.map((item) => <CartItem {...item} key={item.id} />)
         ) : (
@@ -50,7 +50,9 @@ export function ShoppingCart() {
         )}
       </div>
       <div className="text-end font-bold text-xl">
-        Total: {formatCurrency(totalCartPrice)}
+        {cartItems.length > 0
+          ? `Total: ${formatCurrency(totalCartPrice)}`
+          : null}
       </div>
     </div>
   );
