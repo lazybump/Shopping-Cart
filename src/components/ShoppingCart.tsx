@@ -24,7 +24,7 @@ export function ShoppingCart() {
   return (
     <div
       className={`
-        bg-white fixed right-0 top-0 z-20 h-screen w-[500px] px-4 py-5 border border-red-700 transition-all duration-500 
+        bg-white fixed right-0 top-0 z-20 h-screen w-[500px] px-4 py-5 transition-all duration-500 
         ${isOpen ? "" : "translate-x-full"}
       `}
       ref={cartRef}
