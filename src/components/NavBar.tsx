@@ -24,5 +24,3 @@ export function NavBar() {
     </nav>
   );
 }
-
-// w-11/12 m-auto
