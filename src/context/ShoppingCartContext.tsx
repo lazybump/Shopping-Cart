@@ -46,9 +46,8 @@ export const ShoppingCartProvider = ({
       if (!retrievedItem) return [...prev, { id, quantity: 1 }];
 
       return prev.map((item) => {
-        if (item.id === id)
-          return { ...item, quantity: retrievedItem.quantity + 1 };
-        else return item;
+        if (item.id !== id) return item;
+        return { ...item, quantity: retrievedItem.quantity + 1 };
       });
     });
   }
@@ -57,12 +56,12 @@ export const ShoppingCartProvider = ({
     setCartItems((prev) => {
       const retrievedItem = prev.find((item) => item.id === id);
       if (!retrievedItem) return [...prev];
-
-      return prev.map((item) => {
-        if (item.id === id) {
-          return { ...item, quantity: retrievedItem.quantity - 1 };
-        } else return item;
+      const mappedArray = prev.map((item) => {
+        if (item.id !== id) return item;
+        return { ...item, quantity: retrievedItem.quantity - 1 };
       });
+      // we only want the items who have a set quantity
+      return mappedArray.filter((item) => item.quantity > 0);
     });
   }
 
