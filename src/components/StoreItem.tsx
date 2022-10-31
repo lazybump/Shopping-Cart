@@ -21,7 +21,7 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
             {formatCurrency(price)}
           </span>
         </div>
-        <div>
+        <div className="mb-3">
           {quantity === 0 ? (
             <button
               className="bg-blue-500 text-white w-full rounded-sm h-10"
@@ -49,9 +49,6 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
                   +
                 </button>
               </div>
-              <button className="bg-red-500 text-white px-3 py-1 rounded">
-                Remove
-              </button>
             </div>
           )}
         </div>
