@@ -5,7 +5,7 @@ import { useShoppingCart } from "../context/ShoppingCartContext";
 export function NavBar() {
   const { cartQuantity, setIsOpen } = useShoppingCart();
   return (
-    <nav className="bg-white shadow-sm mb-3 sticky top-0">
+    <nav className="bg-white shadow-sm mb-3 fixed w-full top-0">
       <div className="flex justify-between items-center p-5">
         <div className="space-x-4">
           <NavLink to={"/"}>Home</NavLink>
