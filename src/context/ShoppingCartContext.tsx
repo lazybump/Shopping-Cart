@@ -32,7 +32,7 @@ export const ShoppingCartProvider = ({
   children,
 }: ShoppingCartProviderProps) => {
   const [cartItems, setCartItems] = useLocalStorage<CartItemType[]>(
-    "testing",
+    "shopping-cart",
     []
   );
   const [isOpen, setIsOpen] = useState<boolean>(false);
